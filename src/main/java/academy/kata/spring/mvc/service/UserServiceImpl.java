@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Override
     public List<User> getAllUsers() {
@@ -22,11 +21,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         userDao.deleteUser(id);
     }
 
     @Override
+    @Transactional
     public void save(User user) {
         userDao.saveUser(user);
     }

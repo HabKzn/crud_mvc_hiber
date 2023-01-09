@@ -1,8 +1,6 @@
 package academy.kata.spring.mvc.model;
 
-
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name="users")
@@ -10,22 +8,16 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name="name")
     private String name;
 
-    @Column(name="lastName")
     private String lastName;
 
-    @Column(name="age")
     private int age;
 
-    @Column(name="email")
     private String email;
 
-    @Column(name="password")
     private String password;
 
     public User() {

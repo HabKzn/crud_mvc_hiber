@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    UserService userService;
+  private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
