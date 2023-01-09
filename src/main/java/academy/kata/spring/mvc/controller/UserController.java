@@ -5,12 +5,12 @@ import academy.kata.spring.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
+
 
 @Controller
 public class UserController {
@@ -28,11 +28,7 @@ public class UserController {
         }
 
         @PostMapping("/adduser")
-        public String addUser(@Valid User user, BindingResult result, Model model) {
-            if (result.hasErrors()) {
-                return "add-user";
-            }
-
+        public String addUser(User user, Model model) {
             userService.save(user);
             return "redirect:/index";
         }
@@ -50,13 +46,7 @@ public class UserController {
         return "update_user";
     }
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") int id, @Valid User user,
-                             BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            user.setId(id);
-            return "update_user";
-        }
-
+    public String updateUser(@PathVariable("id") int id, User user, Model model) {
         userService.save(user);
         return "redirect:/index";
     }

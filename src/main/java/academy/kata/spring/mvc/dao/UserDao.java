@@ -5,6 +5,7 @@ import academy.kata.spring.mvc.model.User;
 import java.util.List;
 
 public interface UserDao {
+
     List<User> getAllUsers();
 
     void deleteUser(int id);
