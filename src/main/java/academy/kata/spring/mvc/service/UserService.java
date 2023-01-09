@@ -13,7 +13,5 @@ public interface UserService {
 
     void save(User user);
 
-    User getUser(Integer id);
-
     Optional<User> findById(int id);
 }

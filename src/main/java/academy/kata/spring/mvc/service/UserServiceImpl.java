@@ -32,14 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Integer id) {
-        return userDao.getUser(id);
-    }
-
-    @Override
     public Optional<User> findById(int id) {
         return Optional.of(userDao.getUser(id));
     }
-
-
 }
