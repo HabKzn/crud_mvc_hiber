@@ -37,6 +37,7 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
+
     public SpringConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }

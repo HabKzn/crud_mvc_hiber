@@ -14,6 +14,10 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
    private EntityManager entityManager;
 
+    public UserDaoImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("SELECT u from User u").getResultList();
