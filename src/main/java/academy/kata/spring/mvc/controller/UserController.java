@@ -17,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/signup")
+    @GetMapping("/signup")
     public String showSignUpForm(User user) {
             return "add-user";
         }
@@ -28,13 +28,13 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/index")
+    @GetMapping("/index")
     public String showUserList(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
 
-    @RequestMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -49,7 +49,7 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));

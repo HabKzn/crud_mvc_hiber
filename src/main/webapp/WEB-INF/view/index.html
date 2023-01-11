@@ -32,13 +32,24 @@
                 <td th:text="${user.lastName}"></td>
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.email}"></td>
-                <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:method="DELETE" th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+                <td>
+                    <form th:method="patch" th:action="@{/edit/{id}(id=${user.id})}">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:method="delete" th:action="@{/delete/{id}(id=${user.id})}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/signup">Add a new user</a></p>
+    <form th:method="get" th:action="@{/signup}">
+    <button type="submit">Add a new user</button>
+</form>
 </div>
 
 
