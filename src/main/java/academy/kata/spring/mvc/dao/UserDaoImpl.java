@@ -2,6 +2,7 @@ package academy.kata.spring.mvc.dao;
 
 import academy.kata.spring.mvc.model.User;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,18 +15,21 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
    private EntityManager entityManager;
 
+    @Autowired
     public UserDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
     public List<User> getAllUsers() {
+
         return entityManager.createQuery("SELECT u from User u").getResultList();
     }
 
     @Override
     public void deleteUser(int userId) {
-        entityManager.createQuery("DELETE FROM User WHERE id = :userId").setParameter("userId", userId).executeUpdate();
+        entityManager.createQuery("DELETE FROM User WHERE id = :userId")
+                .setParameter("userId", userId).executeUpdate();
     }
 
     @Override

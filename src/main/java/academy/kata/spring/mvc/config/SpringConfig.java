@@ -1,6 +1,7 @@
 package academy.kata.spring.mvc.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,6 +21,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -39,6 +41,7 @@ public class SpringConfig implements WebMvcConfigurer {
 
 
     public SpringConfig(ApplicationContext applicationContext) {
+
         this.applicationContext = applicationContext;
     }
 
@@ -88,6 +91,12 @@ public class SpringConfig implements WebMvcConfigurer {
         jpaTransactionManager.setDataSource(dataSource());
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
         return jpaTransactionManager;
+    }
+
+    @Bean
+    @Qualifier(value = "entityManager")
+    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+        return entityManagerFactory.createEntityManager();
     }
 
     private Properties hibernateProperties() {

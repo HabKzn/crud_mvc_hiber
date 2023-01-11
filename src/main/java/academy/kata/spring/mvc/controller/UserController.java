@@ -10,31 +10,31 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
-    private final UserService userService;
+  private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/signup")
+    @RequestMapping("/signup")
     public String showSignUpForm(User user) {
-        return "add-user";
-    }
+            return "add-user";
+        }
 
-    @PostMapping("/adduser")
+    @RequestMapping("/adduser")
     public String addUser(User user, Model model) {
         userService.save(user);
         return "redirect:/index";
     }
 
-    @GetMapping("/index")
+    @RequestMapping("/index")
     public String showUserList(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "index";
     }
 
-    @GetMapping("/edit/{id}")
+    @RequestMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -43,17 +43,17 @@ public class UserController {
         return "update_user";
     }
 
-    @PatchMapping("/update/{id}")
+    @RequestMapping("/update/{id}")
     public String updateUser(@PathVariable("id") int id, User user, Model model) {
         userService.save(user);
         return "redirect:/index";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @RequestMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userService.delete(user.getId());
         return "redirect:/index";
     }
-    }
+}

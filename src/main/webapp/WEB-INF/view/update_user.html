@@ -6,10 +6,9 @@
 </head>
 <body>
 <h1>Edit user</h1>
-<form action="#"
-      th:action="@{/update/{id}(id=${user.id})}"
+<form th:action="@{/update/{id}(id=${user.id})}"
       th:object="${user}"
-      method="post">
+      th:method="POST">
     <label for="name">ID</label>
     <input type="text" disabled th:field="*{id}" id="name" placeholder="Name">
     <label for="name">First Name</label>
